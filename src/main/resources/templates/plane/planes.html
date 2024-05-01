@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  Planes
+  <a href="/plane/create">Add new plane</a>
+  <table>
+      <thead>
+        <tr>
+            <td>Type</td>
+            <td>Registration</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="plane: ${planes}">
+            <td th:text="${plane.type}"></td>
+            <td th:text="${plane.registration}"></td>
+            <td><a th:href="@{/plane/update/{id}(id=${plane.id})}">Edit</a></td>
+            <td><a th:href="@{/plane/delete/{id}(id=${plane.id})}">Delete</a></td>
+        </tr>
+      </tbody>
+  </table>
+</body>
+</html>

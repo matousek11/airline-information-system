@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Update plane data</h2>
+    <form th:action="@{/plane/update/{planeID}(planeID=${plane.id})}" method="post">
+        <div>
+            <label for="type">Type of plane:</label>
+            <input type="text" id="type" name="type" th:value="${plane.type}"/>
+        </div>
+        <div>
+            <label for="registration">Registration:</label>
+            <input type="text" id="registration" name="registration" th:value="${plane.registration}"/>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</body>
+</html>

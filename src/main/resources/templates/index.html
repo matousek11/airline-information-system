@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+</head>
+<body>
+<div>
+    <h1 th:text="'Hello, ' + ${#authentication.name} + '!'"></h1>
+    <div th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
+        <p>You are an administrator.</p>
+        <a th:href="@{/admin}">Go to Admin Dashboard</a>
+        <br>
+    </div>
+
+    <div th:unless="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
+        <p>You are a regular user.</p>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+</body>
+</html>
