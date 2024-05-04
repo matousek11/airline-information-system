@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createPlane(
+    public String createUser(
             @RequestParam() String username,
             @RequestParam() String password,
             @RequestParam() String firstName,
@@ -73,7 +73,7 @@ public class UserController {
     }
 
     @PostMapping("/update/{userID}")
-    public String updatePlane(
+    public String updateUser(
             @PathVariable Long userID,
             @RequestParam() String username,
             @RequestParam(required = false) String password,

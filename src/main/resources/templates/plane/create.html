@@ -2,16 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Skywise | Create plane</title>
 </head>
 <body>
-    <h2>Login</h2>
-    <div th:if="${param.error}">
-        Invalid username and password.
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
+    <h2>Create plane</h2>
     <form th:action="@{/plane/create}" method="post">
         <div>
             <label for="type">Type of plane:</label>

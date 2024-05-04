@@ -34,4 +34,8 @@ public class Plane {
     public void setRegistration(String registration) {
         this.registration = registration;
     }
+
+    public String getRecognitionString() {
+        return type + " (" + registration + ")";
+    }
 }
