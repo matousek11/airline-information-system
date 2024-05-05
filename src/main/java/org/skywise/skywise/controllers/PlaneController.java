@@ -1,7 +1,9 @@
 package org.skywise.skywise.controllers;
 
 import org.skywise.skywise.models.Plane;
+import org.skywise.skywise.repositories.FlightRepository;
 import org.skywise.skywise.repositories.PlaneRepository;
+import org.skywise.skywise.repositories.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,14 @@ import java.util.Optional;
 @RequestMapping("/plane")
 public class PlaneController {
     private final PlaneRepository planeRepository;
+    private final FlightRepository flightRepository;
+    private final RepairRepository repairRepository;
 
     @Autowired
-    public PlaneController(PlaneRepository planeRepository) {
+    public PlaneController(PlaneRepository planeRepository, FlightRepository flightRepository, RepairRepository repairRepository) {
         this.planeRepository = planeRepository;
+        this.flightRepository = flightRepository;
+        this.repairRepository = repairRepository;
     }
 
     @GetMapping("/create")
@@ -63,6 +69,20 @@ public class PlaneController {
         }
 
         return "redirect:/plane/";
+    }
+
+    @GetMapping("/detail/{repairID}")
+    public String details(@PathVariable long repairID, Model model) {
+        Optional<Plane> optionalPlane = planeRepository.findById(repairID);
+        if (optionalPlane.isEmpty()) {
+            throw new IllegalArgumentException("Repair does not exist");
+        }
+
+        Plane plane = optionalPlane.get();
+        model.addAttribute("plane", plane);
+        model.addAttribute("flights", flightRepository.findAllByPlane(plane));
+        model.addAttribute("repairs", repairRepository.findAllByPlane(plane));
+        return "plane/details";
     }
 
     @GetMapping("/delete/{planeID}")
