@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skywise | Repair details</title>
+</head>
+<body>
+Repair details
+<a href="/flight/">Back</a>
+<a href="/overview">Overview</a>
+<a th:href="@{/repair/update/{id}(id=${repair.id})}">Edit</a>
+<a th:href="@{/repair/delete/{id}(id=${repair.id})}">Delete</a>
+
+<div>
+    <h2>Repair details:</h2>
+    <label>Plane:</label>
+    <p th:text="${repair.plane.recognitionString}"></p>
+    <label>Repair name:</label>
+    <p th:text="${repair.repairName}"></p>
+    <label>Description:</label>
+    <p th:text="${repair.repairDescription}"></p>
+    <h2>Technician</h2>
+    <label>Name:</label>
+    <p th:text="${repair.user.toString()}"></p>
+</div>
+</body>
+</html>

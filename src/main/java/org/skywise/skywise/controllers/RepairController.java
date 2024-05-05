@@ -117,6 +117,18 @@ public class RepairController {
         return "redirect:/repair/";
     }
 
+    @GetMapping("/detail/{repairID}")
+    public String details(@PathVariable long repairID, Model model) {
+        Optional<Repair> optionalRepair = repairRepository.findById(repairID);
+        if (optionalRepair.isEmpty()) {
+            throw new IllegalArgumentException("Repair does not exist");
+        }
+
+        Repair repair = optionalRepair.get();
+        model.addAttribute("repair", repair);
+        return "repair/details";
+    }
+
     @GetMapping("/delete/{repairID}")
     public String deleteUser(@PathVariable Long repairID) {
         repairRepository.deleteById(repairID);
