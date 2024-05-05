@@ -1,13 +1,13 @@
 package org.skywise.skywise.api.models;
 
 public class AirportAPIResponse {
-    private String type;
-    private String ident;
-    private String name;
-    private float lat;
-    private float lon;
-    private int alt;
-    private String via;
+    private final String type;
+    private final String ident;
+    private final String name;
+    private final float lat;
+    private final float lon;
+    private final int alt;
+    private final String via;
 
     public AirportAPIResponse(
             String type,

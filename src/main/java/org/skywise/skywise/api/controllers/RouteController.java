@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RouteController {
-    private RouteService routeService;
+    private final RouteService routeService;
 
     public RouteController() {
         this.routeService = new RouteService();

@@ -28,7 +28,7 @@ public class FlightController {
     private final UserRepository userRepository;
     private final PlaneRepository planeRepository;
     private final RepairRepository repairRepository;
-    private RouteService routeService;
+    private final RouteService routeService;
 
     @Autowired
     public FlightController(
