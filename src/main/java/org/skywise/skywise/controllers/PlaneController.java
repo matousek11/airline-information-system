@@ -13,8 +13,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/plane")
 public class PlaneController {
+    private final PlaneRepository planeRepository;
+
     @Autowired
-    private PlaneRepository planeRepository;
+    public PlaneController(PlaneRepository planeRepository) {
+        this.planeRepository = planeRepository;
+    }
 
     @GetMapping("/create")
     public String createPlane() {
@@ -62,7 +66,7 @@ public class PlaneController {
     }
 
     @GetMapping("/delete/{planeID}")
-    public String updatePlane(@PathVariable Long planeID) {
+    public String deletePlane(@PathVariable Long planeID) {
         planeRepository.deleteById(planeID);
         return "redirect:/plane/";
     }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skywise | Flight detail</title>
+</head>
+<body>
+  Planes
+  <a href="/flight/">Back</a>
+  <a href="/overview">Overview</a>
+  <a th:href="@{/flight/update/{id}(id=${flight.id})}">Edit</a>
+  <a th:href="@{/flight/delete/{id}(id=${flight.id})}">Delete</a>
+
+  <div>
+      <h2>Flight details</h2>
+      <label>Flight number:</label>
+      <p>FR2122</p>
+      <label>Flight route</label>
+      <p th:text="${flight.route}"></p>
+  </div>
+  <div>
+      <h2>Aircraft</h2>
+      <label>Plane type:</label>
+      <p th:text="${flight.plane.type}"></p>
+      <label>Registration:</label>
+      <p th:text="${flight.plane.registration}"></p>
+      <label th:if="${not #lists.isEmpty(repairs)}">Repairs:</label>
+      <table th:if="${not #lists.isEmpty(repairs)}">
+          <thead>
+          <tr>
+              <td>Repair name</td>
+              <td>Technician</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="repair: ${repairs}">
+              <td th:text="${repair.repairName}"></td>
+              <td th:text="${repair.user.toString()}"></td>
+              <td><a th:href="@{/repair/detail/{id}(id=${repair.id})}">Detail</a></td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+  <div>
+      <h2>Crew</h2>
+      <label>Pilot:</label>
+      <p th:text="${flight.pilot.firstName}"></p>
+      <label>Copilot:</label>
+      <p th:text="${flight.copilot.firstName}"></p>
+      <label>Flight attendant:</label>
+      <p th:text="${flight.flightAttendant.firstName}"></p>
+  </div>
+  <div>
+      <h2>Departure</h2>
+      <label>Airport(ICAO):</label>
+      <p th:text="${flight.fromICAO}"></p>
+      <label>Gate:</label>
+      <p th:text="${flight.fromGate}"></p>
+      <label>Departure time:</label>
+      <p th:text="${#dates.format(flight.toTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"></p>
+      <label>Airport METAR:</label>
+      <p th:text="${fromMetar}"></p>
+  </div>
+
+  <div>
+      <h2>Arrival</h2>
+      <label>Airport(ICAO):</label>
+      <p th:text="${flight.fromICAO}"></p>
+      <label>Gate:</label>
+      <p th:text="${flight.fromGate}"></p>
+      <label>Arrival time:</label>
+      <p th:text="${#dates.format(flight.toTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"></p>
+      <label>Airport METAR:</label>
+      <p th:text="${fromMetar}"></p>
+  </div>
+</body>
+</html>

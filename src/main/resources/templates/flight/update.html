@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skywise | Update flight</title>
+</head>
+<body>
+    <h2>Update flight</h2>
+    <form th:action="@{/flight/update/{flightID}(flightID=${flight.id})}" method="post">
+        <div>
+            <label for="pilot">Pilot:</label>
+            <select id="pilot" name="pilotID">
+                <option th:each="pilot: ${pilots}"
+                        th:value="${pilot.id}"
+                        th:text="${pilot.username}"
+                        th:selected="${pilot.id == flight.pilot.id}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="copilot">Copilot:</label>
+            <select id="copilot" name="copilotID">
+                <option th:each="pilot: ${pilots}"
+                        th:value="${pilot.id}"
+                        th:text="${pilot.username}"
+                        th:selected="${pilot.id == flight.copilot.id}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="flightAttendant">Flight attendant:</label>
+            <select id="flightAttendant" name="flightAttendantID">
+                <option th:each="fa: ${flightAttendants}"
+                        th:value="${fa.id}"
+                        th:text="${fa.username}"
+                        th:selected="${fa.id == flight.flightAttendant.id}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="plane">Plane:</label>
+            <select id="plane" name="planeID">
+                <option th:each="plane: ${planes}"
+                        th:value="${plane.id}"
+                        th:text="${plane.recognitionString}"
+                        th:selected="${plane.id == flight.plane.id}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="fromICAO">Departure airport(ICAO):</label>
+            <input type="text" id="fromICAO" name="fromICAO" th:value="${flight.fromICAO}"/>
+        </div>
+        <div>
+            <label for="fromGate">Departure gate:</label>
+            <input type="text" id="fromGate" name="fromGate" th:value="${flight.fromGate}"/>
+        </div>
+        <div>
+            <label for="fromTime">Departure time:</label>
+            <input type="datetime-local"
+                   id="fromTime"
+                   name="fromTime"
+                   th:value="${#dates.format(flight.fromTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"/>
+        </div>
+        <div>
+            <label for="toICAO">Arrival airport(ICAO):</label>
+            <input type="text" id="toICAO" name="toICAO" th:value="${flight.toICAO}"/>
+        </div>
+        <div>
+            <label for="toGate">Arrival gate:</label>
+            <input type="text" id="toGate" name="toGate" th:value="${flight.fromGate}"/>
+        </div>
+        <div>
+            <label for="toTime">Arrival time:</label>
+            <input type="datetime-local"
+                   id="toTime"
+                   name="toTime"
+                   th:value="${#dates.format(flight.toTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"/>
+        </div>
+        <div>
+            <label for="route">Generated route:</label>
+            <textarea id="route" name="route" disabled th:text="${flight.route}"></textarea>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</body>
+</html>
