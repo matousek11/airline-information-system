@@ -10,6 +10,7 @@ import org.skywise.skywise.repositories.PlaneRepository;
 import org.skywise.skywise.repositories.RepairRepository;
 import org.skywise.skywise.repositories.UserRepository;
 import org.skywise.skywise.services.RouteService;
+import org.skywise.skywise.services.ValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class FlightController {
     private final PlaneRepository planeRepository;
     private final RepairRepository repairRepository;
     private final RouteService routeService;
+    private final ValidatorService validatorService;
 
     @Autowired
     public FlightController(
@@ -40,6 +42,7 @@ public class FlightController {
         this.userRepository = userRepository;
         this.planeRepository = planeRepository;
         this.routeService = new RouteService();
+        this.validatorService = new ValidatorService();
         this.repairRepository = repairRepository;
     }
 
@@ -79,6 +82,10 @@ public class FlightController {
                 optionalPlane.isEmpty()
         ) {
             throw new MissingArgumentException("Pilot, copilot, flight attendant or plane is not valid.");
+        }
+
+        if(!validatorService.validateFlightParameters(pilotID, copilotID)) {
+            throw new IllegalArgumentException("Pilot and copilot cannot be same");
         }
 
         long fromTimestamp = getTimestamp(fromTime);
@@ -133,7 +140,7 @@ public class FlightController {
             @RequestParam() String toTime,
             @RequestParam() String fromGate,
             @RequestParam() String toGate,
-            @RequestParam(required = false) String route
+            @RequestParam() String route
     ) throws MissingArgumentException {
         Optional<Flight> optionalFlight = flightRepository.findById(flightID);
         Optional<User> optionalPilot = userRepository.findById(pilotID);
@@ -149,6 +156,10 @@ public class FlightController {
                 optionalPlane.isEmpty()
         ) {
             throw new MissingArgumentException("Flight, pilot, copilot, flight attendant or plane is not valid.");
+        }
+
+        if(!validatorService.validateFlightParameters(pilotID, copilotID)) {
+            throw new IllegalArgumentException("Pilot and copilot cannot be same");
         }
 
         long fromTimestamp = getTimestamp(fromTime);
