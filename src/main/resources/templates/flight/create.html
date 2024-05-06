@@ -45,20 +45,28 @@
                     </select>
                 </div>
                 <div>
-                    <label for="fromICAO">Departure airport(ICAO):</label>
-                    <input id="fromICAO" name="fromICAO" type="text"/>
+                    <label for="flightNumber">Flight number:</label>
+                    <input id="flightNumber" name="flightNumber" type="text"/>
                 </div>
-                <div>
-                    <label for="toICAO">Arrival airport(ICAO):</label>
-                    <input id="toICAO" name="toICAO" type="text"/>
+                <div class="grid">
+                    <div>
+                        <label for="fromICAO">Departure ICAO:</label>
+                        <input id="fromICAO" name="fromICAO" type="text"/>
+                    </div>
+                    <div>
+                        <label for="toICAO">Arrival ICAO:</label>
+                        <input id="toICAO" name="toICAO" type="text"/>
+                    </div>
                 </div>
-                <div>
-                    <label for="fromGate">Departure gate:</label>
-                    <input id="fromGate" name="fromGate" type="text"/>
-                </div>
-                <div>
-                    <label for="toGate">Arrival gate:</label>
-                    <input id="toGate" name="toGate" type="text"/>
+                <div class="grid">
+                    <div>
+                        <label for="fromGate">Departure gate:</label>
+                        <input id="fromGate" name="fromGate" type="text"/>
+                    </div>
+                    <div>
+                        <label for="toGate">Arrival gate:</label>
+                        <input id="toGate" name="toGate" type="text"/>
+                    </div>
                 </div>
                 <div>
                     <label for="fromTime">Departure time:</label>
@@ -70,7 +78,7 @@
                 </div>
                 <div>
                     <label for="route">Generated route:</label>
-                    <textarea disabled id="route" name="route"></textarea>
+                    <textarea id="route" name="route"></textarea>
                 </div>
                 <div>
                     <button type="submit">Add</button>

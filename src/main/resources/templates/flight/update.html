@@ -57,12 +57,28 @@
                     </select>
                 </div>
                 <div>
-                    <label for="fromICAO">Departure airport(ICAO):</label>
-                    <input id="fromICAO" name="fromICAO" th:value="${flight.fromICAO}" type="text"/>
+                    <label for="flightNumber">Flight number:</label>
+                    <input id="flightNumber" name="flightNumber" th:value="${flight.flightNumber}" type="text"/>
                 </div>
-                <div>
-                    <label for="fromGate">Departure gate:</label>
-                    <input id="fromGate" name="fromGate" th:value="${flight.fromGate}" type="text"/>
+                <div class="grid">
+                    <div>
+                        <label for="fromICAO">Departure ICAO:</label>
+                        <input id="fromICAO" name="fromICAO" th:value="${flight.fromICAO}" type="text"/>
+                    </div>
+                    <div>
+                        <label for="toICAO">Arrival ICAO:</label>
+                        <input id="toICAO" name="toICAO" th:value="${flight.toICAO}" type="text"/>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div>
+                        <label for="fromGate">Departure gate:</label>
+                        <input id="fromGate" name="fromGate" th:value="${flight.fromGate}" type="text"/>
+                    </div>
+                    <div>
+                        <label for="toGate">Arrival gate:</label>
+                        <input id="toGate" name="toGate" th:value="${flight.fromGate}" type="text"/>
+                    </div>
                 </div>
                 <div>
                     <label for="fromTime">Departure time:</label>
@@ -70,14 +86,6 @@
                            name="fromTime"
                            th:value="${#dates.format(flight.fromTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"
                            type="datetime-local"/>
-                </div>
-                <div>
-                    <label for="toICAO">Arrival airport(ICAO):</label>
-                    <input id="toICAO" name="toICAO" th:value="${flight.toICAO}" type="text"/>
-                </div>
-                <div>
-                    <label for="toGate">Arrival gate:</label>
-                    <input id="toGate" name="toGate" th:value="${flight.fromGate}" type="text"/>
                 </div>
                 <div>
                     <label for="toTime">Arrival time:</label>
@@ -88,7 +96,7 @@
                 </div>
                 <div>
                     <label for="route">Generated route:</label>
-                    <textarea disabled id="route" name="route" th:text="${flight.route}"></textarea>
+                    <textarea id="route" name="route" th:text="${flight.route}"></textarea>
                 </div>
                 <div>
                     <button type="submit">Update</button>

@@ -25,7 +25,6 @@
                     <td>Plane registration</td>
                     <td>Technician</td>
                     <td>Repair name</td>
-                    <td>Repair description</td>
                     <td></td>
                 </tr>
                 </thead>
@@ -34,7 +33,6 @@
                     <td th:text="${repair.plane.registration}"></td>
                     <td th:text="${repair.user.toString()}"></td>
                     <td th:text="${repair.repairName}"></td>
-                    <td th:text="${repair.repairDescription}"></td>
                     <td class="flex">
                         <a class="image-link" th:href="@{/repair/detail/{id}(id=${repair.id})}">
                             <img alt="detail" th:src="@{/images/detail.svg}"/>

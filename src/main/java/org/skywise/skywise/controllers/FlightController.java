@@ -58,6 +58,7 @@ public class FlightController {
             @RequestParam() long copilotID,
             @RequestParam() long flightAttendantID,
             @RequestParam() long planeID,
+            @RequestParam() String flightNumber,
             @RequestParam() String fromICAO,
             @RequestParam() String toICAO,
             @RequestParam() String fromTime,
@@ -89,13 +90,14 @@ public class FlightController {
         flight.setCopilot(optionalCopilot.get());
         flight.setFlightAttendant(optionalFlightAttendant.get());
         flight.setPlane(optionalPlane.get());
+        flight.setFlightNumber(flightNumber);
         flight.setFromICAO(fromICAO);
         flight.setToICAO(toICAO);
         flight.setFromTime(fromTimestamp);
         flight.setToTime(toTimestamp);
         flight.setFromGate(fromGate);
         flight.setToGate(toGate);
-        flight.setRoute("sadasd");
+        flight.setRoute(route);
         flightRepository.save(flight);
 
         return "redirect:/flight/";
@@ -124,6 +126,7 @@ public class FlightController {
             @RequestParam() long copilotID,
             @RequestParam() long flightAttendantID,
             @RequestParam() long planeID,
+            @RequestParam() String flightNumber,
             @RequestParam() String fromICAO,
             @RequestParam() String toICAO,
             @RequestParam() String fromTime,
@@ -156,6 +159,7 @@ public class FlightController {
         flight.setCopilot(optionalCopilot.get());
         flight.setFlightAttendant(optionalFlightAttendant.get());
         flight.setPlane(optionalPlane.get());
+        flight.setFlightNumber(flightNumber);
         flight.setFromICAO(fromICAO);
         flight.setToICAO(toICAO);
         flight.setFromTime(fromTimestamp);

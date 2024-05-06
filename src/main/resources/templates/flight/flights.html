@@ -22,7 +22,7 @@
             <table>
                 <thead>
                 <tr>
-                    <td>Plane</td>
+                    <td>Number</td>
                     <td>Departure airport</td>
                     <td>Departure time</td>
                     <td>Arrival airport</td>
@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="flight: ${flights}">
-                    <td th:text="${flight.plane.recognitionString}"></td>
+                    <td th:text="${flight.flightNumber}"></td>
                     <td th:text="${flight.fromICAO}"></td>
                     <td th:text="${#dates.format(flight.fromTime * 1000, 'yyyy-MM-dd HH:mm')}"></td>
                     <td th:text="${flight.toICAO}"></td>

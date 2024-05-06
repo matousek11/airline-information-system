@@ -20,6 +20,7 @@ public class Flight {
     @ManyToOne()
     @JoinColumn(name = "planeID", nullable = false)
     private Plane plane;
+    private String flightNumber;
     private String fromICAO;
     private String toICAO;
     private String fromGate;
@@ -111,14 +112,6 @@ public class Flight {
         this.toTime = toTime;
     }
 
-    /*public Waypoint getStartingWaypoint() {
-        return startingWaypoint;
-    }
-
-    public void setStartingWaypoint(Waypoint startingWaypoint) {
-        this.startingWaypoint = startingWaypoint;
-    }*/
-
     public String getRoute() {
         return route;
     }
@@ -133,5 +126,13 @@ public class Flight {
 
     public void setFlightAttendant(User flightAttendant) {
         this.flightAttendant = flightAttendant;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 }

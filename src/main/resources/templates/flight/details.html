@@ -18,7 +18,7 @@
                     <h2>Flight details</h2>
 
                     <label>Flight number:</label>
-                    <p>FR2122</p>
+                    <p th:text="${flight.flightNumber}"></p>
 
                     <label>Flight route:</label>
                     <p th:text="${flight.route}"></p>
@@ -29,15 +29,15 @@
                     <div class="grid">
                         <div>
                             <label>Pilot:</label>
-                            <p th:text="${flight.pilot.firstName}"></p>
+                            <p th:text="${flight.pilot.toString()}"></p>
                         </div>
                         <div>
                             <label>Copilot:</label>
-                            <p th:text="${flight.copilot.firstName}"></p>
+                            <p th:text="${flight.copilot.toString()}"></p>
                         </div>
                         <div>
                             <label>Flight attendant:</label>
-                            <p th:text="${flight.flightAttendant.firstName}"></p>
+                            <p th:text="${flight.flightAttendant.toString()}"></p>
                         </div>
                     </div>
                 </div>
