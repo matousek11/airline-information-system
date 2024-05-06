@@ -3,32 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Users</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/overview.css}"/>
 </head>
 <body>
-  Users
-  <a href="/user/create">Add new user</a>
-  <a href="/overview">Overview</a>
-  <table>
-      <thead>
-        <tr>
-            <td>Username</td>
-            <td>First name</td>
-            <td>Last name</td>
-            <td>Email</td>
-            <td>Role</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.role}"></td>
-            <td><a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a></td>
-            <td><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a></td>
-        </tr>
-      </tbody>
-  </table>
+<nav th:replace="fragments/layout :: header"></nav>
+<section th:class="content">
+    <aside th:replace="fragments/layout :: aside-nav"></aside>
+    <div th:class="main-content">
+        <div class="table-wrapper">
+            <div class="flex flex-align-center">
+                <h2>Users</h2>
+                <a class="image-link" href="/user/create"><img alt="add" th:src="@{/images/plus.svg}"/></a>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <td>Username</td>
+                    <td>First name</td>
+                    <td>Last name</td>
+                    <td>Email</td>
+                    <td>Role</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.role}"></td>
+                    <td class="flex">
+                        <a class="image-link" th:href="@{/user/update/{id}(id=${user.id})}">
+                            <img alt="edit" th:src="@{/images/edit.svg}"/>
+                        </a>
+                        <a class="image-link" th:href="@{/user/delete/{id}(id=${user.id})}">
+                            <img alt="delete" th:src="@{/images/delete.svg}"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<footer th:replace="fragments/layout :: footer"></footer>
 </body>
 </html>

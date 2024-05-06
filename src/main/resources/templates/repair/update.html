@@ -3,47 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Update repair</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" th:href="@{/css/forms.css}"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
-    <h2>Update repair</h2>
-    <form th:action="@{/repair/update/{repairID}(repairID=${repair.id})}" method="post">
-        <form th:action="@{/repair/create}" method="post">
-            <div>
-                <label for="technician">Technician:</label>
-                <select id="technician" name="userID">
-                    <option
-                            th:each="technician: ${technicians}"
-                            th:value="${technician.id}"
-                            th:text="${technician.username}"
-                            th:selected="${technician.id == repair.user.id}"
-                    >
-                    </option>
-                </select>
-            </div>
-            <div>
-                <label for="plane">Plane:</label>
-                <select id="plane" name="planeID">
-                    <option
-                            th:each="plane: ${planes}"
-                            th:value="${plane.id}"
-                            th:text="${plane.recognitionString}"
-                            th:selected="${plane.id == repair.plane.id}"
-                    >
-                    </option>
-                </select>
-            </div>
-            <div>
-                <label for="repairName">Repair name:</label>
-                <input type="text" id="repairName" name="repairName" th:value="${repair.repairName}">
-            </div>
-            <div>
-                <label for="repairDescription">Repair description:</label>
-                <textarea id="repairDescription" name="repairDescription" th:text="${repair.repairDescription}"></textarea>
-            </div>
-            <div>
-                <button type="submit">Add</button>
-            </div>
-        </form>
-    </form>
+<nav th:replace="fragments/layout :: header"></nav>
+<section th:class="content">
+    <aside th:replace="fragments/layout :: aside-nav"></aside>
+    <div th:class="main-content">
+        <div class="form-wrapper margin-left">
+            <h2>Update repair</h2>
+            <form method="post" th:action="@{/repair/update/{repairID}(repairID=${repair.id})}">
+                <form method="post" th:action="@{/repair/create}">
+                    <div>
+                        <label for="technician">Technician:</label>
+                        <select id="technician" name="userID">
+                            <option
+                                    th:each="technician: ${technicians}"
+                                    th:selected="${technician.id == repair.user.id}"
+                                    th:text="${technician.username}"
+                                    th:value="${technician.id}"
+                            >
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="plane">Plane:</label>
+                        <select id="plane" name="planeID">
+                            <option
+                                    th:each="plane: ${planes}"
+                                    th:selected="${plane.id == repair.plane.id}"
+                                    th:text="${plane.recognitionString}"
+                                    th:value="${plane.id}"
+                            >
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="repairName">Repair name:</label>
+                        <input id="repairName" name="repairName" th:value="${repair.repairName}" type="text">
+                    </div>
+                    <div>
+                        <label for="repairDescription">Repair description:</label>
+                        <textarea id="repairDescription" name="repairDescription"
+                                  th:text="${repair.repairDescription}"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit">Add</button>
+                    </div>
+                </form>
+            </form>
+        </div>
+    </div>
+</section>
+<footer th:replace="fragments/layout :: footer"></footer>
 </body>
 </html>

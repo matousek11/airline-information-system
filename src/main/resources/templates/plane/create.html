@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Create plane</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/forms.css}"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
-    <h2>Create plane</h2>
-    <form th:action="@{/plane/create}" method="post">
-        <div>
-            <label for="type">Type of plane:</label>
-            <input type="text" id="type" name="type"/>
+<nav th:replace="fragments/layout :: header"></nav>
+<section th:class="content">
+    <aside th:replace="fragments/layout :: aside-nav"></aside>
+    <div th:class="main-content">
+        <div class="form-wrapper margin-left">
+            <h2>Create plane</h2>
+            <form method="post" th:action="@{/plane/create}">
+                <div>
+                    <label for="type">Type of plane:</label>
+                    <input id="type" name="type" type="text"/>
+                </div>
+                <div>
+                    <label for="registration">Registration:</label>
+                    <input id="registration" name="registration" type="text"/>
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="registration">Registration:</label>
-            <input type="text" id="registration" name="registration"/>
-        </div>
-        <div>
-            <button type="submit">Add</button>
-        </div>
-    </form>
+    </div>
+</section>
+<footer th:replace="fragments/layout :: footer"></footer>
 </body>
 </html>

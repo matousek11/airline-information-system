@@ -2,101 +2,110 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <title>Skywise | Welcome</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/overview.css}" rel="stylesheet"/>
 </head>
 <body>
-<div>
-    <h1 th:text="'Hello, ' + ${#authentication.name} + '!'"></h1>
-    <div th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
-        <p>You are an administrator.</p>
-        <a th:href="@{/admin}">Go to Admin Dashboard</a>
-        <br>
-    </div>
+<nav th:replace="fragments/layout :: header"></nav>
+<section th:class="content">
+    <aside th:replace="fragments/layout :: aside-nav"></aside>
+    <div th:class="main-content">
+        <!--<h1 th:text="'Hello, ' + ${#authentication.name} + '!'"></h1>
+        <div th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
+            <p>You are an administrator.</p>
+            <a th:href="@{/admin}">Go to Admin Dashboard</a>
+            <br>
+        </div>
 
-    <div th:unless="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
-        <p>You are a regular user.</p>
-    </div>
+        <div th:unless="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
+            <p>You are a regular user.</p>
+        </div>-->
 
-    <div>
-        Menu:
-        <a href="/plane/">Planes</a>
-        <a href="/flight/">Flights</a>
-        <a href="/repair/">Repairs</a>
-        <a href="/user/">Users</a>
-    </div>
+        <div class="table-wrapper">
+            <h2>Upcoming flights</h2>
+            <p th:if="${flights.isEmpty()}">No upcoming flights</p>
+            <table th:if="${not #lists.isEmpty(flights)}">
+                <thead>
+                <tr>
+                    <td>Departure airport</td>
+                    <td>Arrival airport</td>
+                    <td>Departure time</td>
+                    <td>Plane</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="flight: ${flights}">
+                    <td th:text="${flight.fromICAO}"></td>
+                    <td th:text="${flight.toICAO}"></td>
+                    <td th:text="${#dates.format(flight.fromTime * 1000, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${flight.plane.registration}"></td>
+                    <td class="flex">
+                        <a class="image-link" th:href="@{/flight/detail/{id}(id=${flight.id})}">
+                            <img alt="detail" th:src="@{/images/detail.svg}"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <div>
-        <h2>Upcoming flights</h2>
-        <p th:if="${flights.isEmpty()}">No upcoming flights</p>
-        <table th:if="${not #lists.isEmpty(flights)}">
-            <thead>
-            <tr>
-                <td>Plane</td>
-                <td>Departure airport</td>
-                <td>Arrival airport</td>
-                <td>Departure time</td>
-                <td>Arrival time</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="flight: ${flights}">
-                <td th:text="${flight.plane.recognitionString}"></td>
-                <td th:text="${flight.fromICAO}"></td>
-                <td th:text="${flight.toICAO}"></td>
-                <td th:text="${#dates.format(flight.fromTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                <td th:text="${#dates.format(flight.toTime * 1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                <td><a th:href="@{/flight/detail/{id}(id=${flight.id})}">Detail</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="table-wrapper">
+            <h2>Repairs</h2>
+            <p th:if="${repairs.isEmpty()}">No repairs</p>
+            <table th:if="${not #lists.isEmpty(repairs)}">
+                <thead>
+                <tr>
+                    <td>Plane</td>
+                    <td>Technician</td>
+                    <td>Repair</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="repair: ${repairs}">
+                    <td th:text="${repair.plane.recognitionString}"></td>
+                    <td th:text="${repair.user.toString()}"></td>
+                    <td th:text="${repair.repairName}"></td>
+                    <td class="flex">
+                        <a class="image-link" th:href="@{/repair/detail/{id}(id=${repair.id})}">
+                            <img alt="detail" th:src="@{/images/detail.svg}"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <div>
-        <h2>Repairs</h2>
-        <p th:if="${repairs.isEmpty()}">No repairs</p>
-        <table th:if="${not #lists.isEmpty(repairs)}">
-            <thead>
-            <tr>
-                <td>Plane</td>
-                <td>Technician</td>
-                <td>Repair name</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="repair: ${repairs}">
-                <td th:text="${repair.plane.recognitionString}"></td>
-                <td th:text="${repair.user.toString()}"></td>
-                <td th:text="${repair.repairName}"></td>
-                <td><a th:href="@{/repair/detail/{id}(id=${repair.id})}">Detail</a></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="table-wrapper">
+            <h2>Fleet</h2>
+            <p th:if="${planes.isEmpty()}">No plane</p>
+            <table th:if="${not #lists.isEmpty(planes)}">
+                <thead>
+                <tr>
+                    <td>Plane</td>
+                    <td>Registration</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="plane: ${planes}">
+                    <td th:text="${plane.type}"></td>
+                    <td th:text="${plane.registration}"></td>
+                    <td class="flex">
+                        <a class="image-link" th:href="@{/plane/detail/{id}(id=${plane.id})}">
+                            <img alt="detail" th:src="@{/images/detail.svg}"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</section>
+<footer th:replace="fragments/layout :: footer">
 
-    <div>
-        <h2>Fleet</h2>
-        <p th:if="${planes.isEmpty()}">No plane</p>
-        <table th:if="${not #lists.isEmpty(planes)}">
-            <thead>
-            <tr>
-                <td>Plane</td>
-                <td>Registration</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="plane: ${planes}">
-                <td th:text="${plane.type}"></td>
-                <td th:text="${plane.registration}"></td>
-                <td><a th:href="@{/plane/detail/{id}(id=${plane.id})}">Detail</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
-</div>
+</footer>
 </body>
 </html>

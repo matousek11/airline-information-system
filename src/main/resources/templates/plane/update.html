@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Update plane</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" th:href="@{/css/forms.css}"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 <body>
-    <h2>Update plane</h2>
-    <form th:action="@{/plane/update/{planeID}(planeID=${plane.id})}" method="post">
-        <div>
-            <label for="type">Type of plane:</label>
-            <input type="text" id="type" name="type" th:value="${plane.type}"/>
+<nav th:replace="fragments/layout :: header"></nav>
+<section th:class="content">
+    <aside th:replace="fragments/layout :: aside-nav"></aside>
+    <div th:class="main-content">
+        <div class="form-wrapper margin-left">
+            <h2>Update plane</h2>
+            <form method="post" th:action="@{/plane/update/{planeID}(planeID=${plane.id})}">
+                <div>
+                    <label for="type">Type of plane:</label>
+                    <input id="type" name="type" th:value="${plane.type}" type="text"/>
+                </div>
+                <div>
+                    <label for="registration">Registration:</label>
+                    <input id="registration" name="registration" th:value="${plane.registration}" type="text"/>
+                </div>
+                <div>
+                    <button type="submit">Update</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="registration">Registration:</label>
-            <input type="text" id="registration" name="registration" th:value="${plane.registration}"/>
-        </div>
-        <div>
-            <button type="submit">Update</button>
-        </div>
-    </form>
+    </div>
+</section>
+<footer th:replace="fragments/layout :: footer"></footer>
 </body>
 </html>

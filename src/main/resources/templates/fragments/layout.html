@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header">
+    <h2>Skywise</h2>
+    <div>
+        <!--<p>Lukáš Matoušek</p>-->
+        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+<aside th:class="sidebar" th:fragment="aside-nav">
+    <nav>
+        <ul>
+            <li>
+                <img class="small-img" th:src="@{/images/info.svg}" alt="Overview"/>
+                <a href="/overview">Overview</a>
+            </li>
+            <li>
+                <img th:src="@{/images/location.svg}" alt="Flights"/>
+                <a href="/flight/">Flights</a>
+            </li>
+            <li>
+                <img th:src="@{/images/plane.svg}" alt="Planes"/>
+                <a href="/plane/">Planes</a>
+            </li>
+            <li>
+                <img th:src="@{/images/repair.svg}" alt="Repairs"/>
+                <a href="/repair/">Repairs</a>
+            </li>
+            <li>
+                <img th:src="@{/images/users.svg}" alt="Users"/>
+                <a href="/user/">Users</a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+<footer th:fragment="footer">
+    <p>&copy Skywise</p>
+</footer>
+</body>
+</html>

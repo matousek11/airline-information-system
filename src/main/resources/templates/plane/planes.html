@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Planes</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/overview.css}"/>
 </head>
 <body>
-  Planes
-  <a href="/plane/create">Add new plane</a>
-  <a href="/overview">Overview</a>
-  <table>
-      <thead>
-        <tr>
-            <td>Type</td>
-            <td>Registration</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="plane: ${planes}">
-            <td th:text="${plane.type}"></td>
-            <td th:text="${plane.registration}"></td>
-            <td><a th:href="@{/plane/update/{id}(id=${plane.id})}">Edit</a></td>
-            <td><a th:href="@{/plane/delete/{id}(id=${plane.id})}">Delete</a></td>
-        </tr>
-      </tbody>
-  </table>
+<nav th:replace="fragments/layout :: header"></nav>
+<section th:class="content">
+    <aside th:replace="fragments/layout :: aside-nav"></aside>
+    <div th:class="main-content">
+        <div class="table-wrapper">
+            <div class="flex flex-align-center">
+                <h2>Planes</h2>
+                <a class="image-link" href="/plane/create"><img alt="add" th:src="@{/images/plus.svg}"/></a>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <td>Type</td>
+                    <td>Registration</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="plane: ${planes}">
+                    <td th:text="${plane.type}"></td>
+                    <td th:text="${plane.registration}"></td>
+                    <td class="flex">
+                        <a class="image-link" th:href="@{/plane/detail/{id}(id=${plane.id})}">
+                            <img alt="detail" th:src="@{/images/detail.svg}"/>
+                        </a>
+                        <a class="image-link" th:href="@{/plane/update/{id}(id=${plane.id})}">
+                            <img alt="edit" th:src="@{/images/edit.svg}"/>
+                        </a>
+                        <a class="image-link" th:href="@{/plane/delete/{id}(id=${plane.id})}">
+                            <img alt="delete" th:src="@{/images/delete.svg}"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<footer th:replace="fragments/layout :: footer"></footer>
 </body>
 </html>
