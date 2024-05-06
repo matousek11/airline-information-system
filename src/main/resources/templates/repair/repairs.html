@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Repairs</title>
@@ -14,7 +15,9 @@
         <div class="table-wrapper">
             <div class="flex flex-align-center">
                 <h2>Repairs</h2>
-                <a class="image-link" href="/repair/create"><img alt="add" th:src="@{/images/plus.svg}"/></a>
+                <a class="image-link" href="/repair/create" sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN')">
+                    <img alt="add" th:src="@{/images/plus.svg}"/>
+                </a>
             </div>
             <table>
                 <thead>
@@ -36,10 +39,14 @@
                         <a class="image-link" th:href="@{/repair/detail/{id}(id=${repair.id})}">
                             <img alt="detail" th:src="@{/images/detail.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/repair/update/{id}(id=${repair.id})}">
+                        <a class="image-link"
+                           th:href="@{/repair/update/{id}(id=${repair.id})}"
+                           sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN')">
                             <img alt="edit" th:src="@{/images/edit.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/repair/delete/{id}(id=${repair.id})}">
+                        <a class="image-link"
+                           th:href="@{/repair/delete/{id}(id=${repair.id})}"
+                           sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN')">
                             <img alt="delete" th:src="@{/images/delete.svg}"/>
                         </a>
                     </td>

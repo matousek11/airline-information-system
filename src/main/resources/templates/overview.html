@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Welcome</title>
@@ -11,17 +12,6 @@
 <section th:class="content">
     <aside th:replace="fragments/layout :: aside-nav"></aside>
     <div th:class="main-content">
-        <!--<h1 th:text="'Hello, ' + ${#authentication.name} + '!'"></h1>
-        <div th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
-            <p>You are an administrator.</p>
-            <a th:href="@{/admin}">Go to Admin Dashboard</a>
-            <br>
-        </div>
-
-        <div th:unless="${#strings.contains(#authentication.principal.authorities,'ADMIN')}">
-            <p>You are a regular user.</p>
-        </div>-->
-
         <div class="table-wrapper">
             <h2>Upcoming flights</h2>
             <p th:if="${flights.isEmpty()}">No upcoming flights</p>
@@ -51,7 +41,7 @@
             </table>
         </div>
 
-        <div class="table-wrapper">
+        <div class="table-wrapper" sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN')">
             <h2>Repairs</h2>
             <p th:if="${repairs.isEmpty()}">No repairs</p>
             <table th:if="${not #lists.isEmpty(repairs)}">
@@ -78,7 +68,7 @@
             </table>
         </div>
 
-        <div class="table-wrapper">
+        <div class="table-wrapper" sec:authorize="hasAnyRole('ADMIN', 'PLANNER', 'PILOT', 'TECHNICIAN')">
             <h2>Fleet</h2>
             <p th:if="${planes.isEmpty()}">No plane</p>
             <table th:if="${not #lists.isEmpty(planes)}">
@@ -105,7 +95,6 @@
     </div>
 </section>
 <footer th:replace="fragments/layout :: footer">
-
 </footer>
 </body>
 </html>

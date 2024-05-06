@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Users</title>
@@ -35,10 +36,14 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.role}"></td>
                     <td class="flex">
-                        <a class="image-link" th:href="@{/user/update/{id}(id=${user.id})}">
+                        <a class="image-link"
+                           th:href="@{/user/update/{id}(id=${user.id})}"
+                           sec:authorize="hasAnyRole('ADMIN')">
                             <img alt="edit" th:src="@{/images/edit.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/user/delete/{id}(id=${user.id})}">
+                        <a class="image-link"
+                           th:href="@{/user/delete/{id}(id=${user.id})}"
+                           sec:authorize="hasAnyRole('ADMIN')">
                             <img alt="delete" th:src="@{/images/delete.svg}"/>
                         </a>
                     </td>

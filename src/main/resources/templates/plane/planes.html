@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Planes</title>
@@ -14,7 +15,9 @@
         <div class="table-wrapper">
             <div class="flex flex-align-center">
                 <h2>Planes</h2>
-                <a class="image-link" href="/plane/create"><img alt="add" th:src="@{/images/plus.svg}"/></a>
+                <a class="image-link" href="/plane/create" sec:authorize="hasAnyRole('ADMIN')">
+                    <img alt="add" th:src="@{/images/plus.svg}"/>
+                </a>
             </div>
             <table>
                 <thead>
@@ -32,10 +35,14 @@
                         <a class="image-link" th:href="@{/plane/detail/{id}(id=${plane.id})}">
                             <img alt="detail" th:src="@{/images/detail.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/plane/update/{id}(id=${plane.id})}">
+                        <a class="image-link"
+                           th:href="@{/plane/update/{id}(id=${plane.id})}"
+                           sec:authorize="hasAnyRole('ADMIN')">
                             <img alt="edit" th:src="@{/images/edit.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/plane/delete/{id}(id=${plane.id})}">
+                        <a class="image-link"
+                           th:href="@{/plane/delete/{id}(id=${plane.id})}"
+                           sec:authorize="hasAnyRole('ADMIN')">
                             <img alt="delete" th:src="@{/images/delete.svg}"/>
                         </a>
                     </td>

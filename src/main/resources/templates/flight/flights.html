@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Skywise | Flights</title>
@@ -14,7 +15,9 @@
         <div class="table-wrapper">
             <div class="flex flex-align-center">
                 <h2>Flights</h2>
-                <a class="image-link" href="/flight/create"><img alt="add" th:src="@{/images/plus.svg}"/></a>
+                <a class="image-link" href="/flight/create" sec:authorize="hasAnyRole('ADMIN', 'PLANNER')">
+                    <img alt="add" th:src="@{/images/plus.svg}"/>
+                </a>
             </div>
             <table>
                 <thead>
@@ -35,13 +38,18 @@
                     <td th:text="${flight.toICAO}"></td>
                     <td th:text="${#dates.format(flight.toTime * 1000, 'yyyy-MM-dd HH:mm')}"></td>
                     <td class="flex">
-                        <a class="image-link" th:href="@{/flight/detail/{id}(id=${flight.id})}">
+                        <a class="image-link"
+                           th:href="@{/flight/detail/{id}(id=${flight.id})}">
                             <img alt="detail" th:src="@{/images/detail.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/flight/update/{id}(id=${flight.id})}">
+                        <a class="image-link"
+                           th:href="@{/flight/update/{id}(id=${flight.id})}"
+                           sec:authorize="hasAnyRole('ADMIN', 'PLANNER')">
                             <img alt="edit" th:src="@{/images/edit.svg}"/>
                         </a>
-                        <a class="image-link" th:href="@{/flight/delete/{id}(id=${flight.id})}">
+                        <a class="image-link"
+                           th:href="@{/flight/delete/{id}(id=${flight.id})}"
+                           sec:authorize="hasAnyRole('ADMIN', 'PLANNER')">
                             <img alt="delete" th:src="@{/images/delete.svg}"/>
                         </a>
                     </td>
