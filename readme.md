@@ -1,5 +1,18 @@
 # Airline information system
+![name](screenshot.png)
+
+## Table of content
+ - [Installation](#installation)
+ - [Specification](#specification)
+
+
+## Installation
+1. Fill in env based on `.env.example`
+2. `mvn clean install`
+3. `mvn spring-boot:run`
 **Can be used FOR SIMULATION FLIGHTS ONLY!**
+
+## Specification
 
 system roles:
  - admin
@@ -10,10 +23,7 @@ system roles:
 
 system can:
 - save planes in airline
-- save staff names and their purpose
-- plan flights with each plane
-  - generate flight route
-  - display time graph with busy planes
+- save staff names and their roles
 - admin
   - can add pilots, flight attendants and technicians
 - planner
@@ -22,26 +32,14 @@ system can:
   - loged in pilot can look at his flights
   - check metar at airports
   - see flight plan
-  - see expected fuel to load
-  - number of passengers
-  - total planned weight of plane
 - FA
-  - can se gate and departure time(same for arrival)
+  - can see gate and departure time(same for arrival)
 - technician
   - can log aircraft repair
 
-Business entities:
-- users
-- planes
-- flights
-- maintenance logs of each plane
-
 Tech stack:
 - Java Spring Boot
-- React
-- Material UI
-- less
+- Thymeleaf
 
 Used api:
-- [weather](https://aviationweather.gov/data/api/#/Data/dataMetars)
-- [flight routes generation](https://flightplandatabase.com/dev/api)
+- [METAR from airports](https://flightplandatabase.com/dev/api)

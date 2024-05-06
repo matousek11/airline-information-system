@@ -8,7 +8,7 @@ import org.skywise.skywise.api.models.AirportAPIResponse;
 import java.io.IOException;
 
 public class RouteService {
-    private final String API_KEY = "QV26nYD5s7dFJHMHic2I92DWavZtOodT8F16MH37";
+    private final String API_KEY;
     private final String BASE_URL = "https://api.flightplandatabase.com";
     private final String PLAN_URL = "/plan";
     private final String AIRPORT_URL = "/nav/airport/";
@@ -16,7 +16,7 @@ public class RouteService {
     private final String WEATHER_URL = "/weather/";
 
     public RouteService() {
-
+        this.API_KEY = System.getenv("METAR_API_KEY");
     }
 
     private String getRoutePlanUrl() {
